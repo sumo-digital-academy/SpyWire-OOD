@@ -3,9 +3,6 @@
 
 #include "Play.h"
 #include "GameObjectClass.h"
-#include "Agent8.h"
-#include "StateBaseClass.h"
-#include "StateAppear.h"
 
 #include "Factory.h"
 
@@ -16,7 +13,6 @@ int DISPLAY_SCALE = 1;
 struct GameState
 {
 	int score = 0;
-	Agent8* player = nullptr;
 };
 
 GameState gameState;
@@ -30,10 +26,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	Play::CentreAllSpriteOrigins();
 	Play::LoadBackground("Data\\Backgrounds\\background.png");
 	Play::StartAudioLoop("music");
-	Agent8* player = (Agent8*)Factory::ReturnCreateObject(TYPE_AGENT8, { 115, 0 });
+	Factory::CreateObject(TYPE_AGENT8, { 115, 0 });
 	Factory::CreateObject(TYPE_FAN, { 1130, 250 });
-
-	gameState.player = player;
 }
 
 // Called by PlayBuffer every frame (60 times a second!)

@@ -1,7 +1,6 @@
 #pragma once
-#include "Agent8.h"
+#include "GameObjectClass.h"
 
-// We won't make this base class a pure virtual class as we will want to construct it in the MainGame to store each of the children states in the same pointer.
 class StateBaseClass
 	: public GameObjectClass
 {

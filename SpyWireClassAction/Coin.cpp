@@ -1,7 +1,6 @@
 #define PLAY_USING_GAMEOBJECT_MANAGER
 #include "Play.h"
 #include "Coin.h"
-#include "Agent8.h"
 #include "StateBaseClass.h"
 #include "Factory.h"
 
@@ -9,8 +8,7 @@ static constexpr int SPEED = 16;
 
 void Coin::Update()
 {
-	Agent8* player = (Agent8*)s_pPlayer;
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, player))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, s_pPlayer))
 		OnCollision();
 
 	UpdateMovement();

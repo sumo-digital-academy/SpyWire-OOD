@@ -1,13 +1,10 @@
 #include "Play.h"
 #include "Tools.h"
-#include "Agent8.h"
 #include "StateBaseClass.h"
 
 void Tools::Update()
 {
-	Agent8* player = (Agent8*)s_pPlayer; // This will allow us to avoid type casting the player every time we need them.
-
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, player))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, s_pPlayer))
 	{
 		Play::StopAudioLoop("music");
 		Play::PlayAudio("die");

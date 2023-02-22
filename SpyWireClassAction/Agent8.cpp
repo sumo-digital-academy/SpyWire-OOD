@@ -2,12 +2,6 @@
 #include "StateBaseClass.h"
 #include "Agent8.h"
 
-//// Core states
-//#include "StateAppear.h"
-//#include "StatePlay.h"
-//#include "StateHalt.h"
-//#include "StateDead.h"
-
 Agent8::Agent8(GameObjectType objType, Point2f position, std::string spriteName)
 	: GameObjectClass(objType, position, spriteName)
 {

@@ -10,8 +10,6 @@ StateBaseClass* StateBaseClass::s_pStatePointer = new StateAppear;
 
 void StateBaseClass::SwitchStates(Agent8State newState)
 {
-	Agent8* player = (Agent8*)GameObjectClass::GetPlayer();
-
 	switch (newState)
 	{
 	case STATE_APPEAR:
