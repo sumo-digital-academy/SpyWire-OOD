@@ -4,7 +4,7 @@ class Laser :
     public GameObjectClass
 {
 public:
-    Laser(GameObjectType objType, Point2f position, std::string spriteName) : GameObjectClass(objType, position, spriteName) {};
+    Laser(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName) : GameObjectClass(objType, position, velocity, spriteName) {};
     ~Laser() {};
 
     void Update() override;

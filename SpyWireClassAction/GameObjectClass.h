@@ -25,7 +25,7 @@ class GameObjectClass
 {
 public:
 	GameObjectClass() {	s_vpGameObjectList.push_back(this);	}; // default constructor - when when you make a GameObject with no parameters
-	GameObjectClass( GameObjectType objType, Point2f position, std::string spriteName);
+	GameObjectClass( GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName);
 	virtual ~GameObjectClass() {};
 
 	static void UpdateAll();

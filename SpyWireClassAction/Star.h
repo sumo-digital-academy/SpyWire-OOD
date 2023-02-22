@@ -4,7 +4,7 @@ class Star :
     public GameObjectClass
 {
 public:
-    Star(GameObjectType objType, Point2f position, std::string spriteName) : GameObjectClass(objType, position, spriteName) {};
+    Star(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName);
     ~Star() {};
 
     void Update() override;

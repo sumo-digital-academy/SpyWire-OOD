@@ -8,7 +8,7 @@
 #include "Star.h"
 #include "Laser.h"
 
-void Factory::CreateObject(GameObjectType objType, Point2f pos)
+void Factory::CreateObject(GameObjectType objType, Point2f pos, Vector2f vel)
 {
 	switch (objType)
 	{
@@ -17,22 +17,18 @@ void Factory::CreateObject(GameObjectType objType, Point2f pos)
 		break;
 
 	case TYPE_AGENT8:
-		new Agent8(TYPE_AGENT8, pos, "agent8");
+		new Agent8(TYPE_AGENT8, pos, vel, "agent8");
 		break;
 
 	case TYPE_FAN:
 	{
-		Fan* f = new Fan(TYPE_FAN, pos, "fan");
-		f->SetVelocity({ 0,3 });
-		f->SetAnimationSpeed(1.0f);
+		Fan* f = new Fan(TYPE_FAN, pos, vel, "fan");
 		break;
 	}
 
 	case TYPE_COIN:
 	{
-		Coin* c = new Coin(TYPE_COIN, pos, "coin");
-		c->SetVelocity({ -3, 0 });
-		c->SetRotationSpeed(0.1f);
+		Coin* c = new Coin(TYPE_COIN, pos, vel, "coin");
 		break;
 	}
 
@@ -40,15 +36,16 @@ void Factory::CreateObject(GameObjectType objType, Point2f pos)
 	{
 		Tools* t = nullptr;
 
+		// Note that due to there being a 50% chance of ever a spanner or driver we will set each specific type here not in the constructor
+		// This will allow for the user to create a specific type of tool should they need to later on.
 		if (Play::RandomRoll(2) == 1)
 		{
-			Tools* t = new Tools(TYPE_TOOL, pos, "spanner");
-			t->SetVelocity({ -4, 0 });
+			Tools* t = new Tools(TYPE_TOOL, pos, vel, "spanner");
 			t->SetRotationSpeed(0.1f);
 		}
 		else
 		{
-			Tools* t = new Tools(TYPE_TOOL, pos, "driver");
+			Tools* t = new Tools(TYPE_TOOL, pos, vel, "driver");
 			t->SetVelocity({ -8, Play::RandomRollRange(-1, 1) * 6 });
 		}
 
@@ -57,18 +54,13 @@ void Factory::CreateObject(GameObjectType objType, Point2f pos)
 
 	case TYPE_STAR:
 	{
-		Star* s = new Star(TYPE_STAR, pos, "star");
-		s->SetRotation(0.1f);
-		s->SetAcceleration({ 0.0f, 0.5f });
-
+		Star* s = new Star(TYPE_STAR, pos, vel, "star");
 		break;
 	}
 
 	case TYPE_LASER:
 	{
-		Laser* l = new Laser(TYPE_LASER, pos, "laser");
-		l->SetVelocity({ 32, 0 });
-
+		Laser* l = new Laser(TYPE_LASER, pos, vel, "laser");
 		break;
 	}
 
@@ -77,7 +69,7 @@ void Factory::CreateObject(GameObjectType objType, Point2f pos)
 	}
 }
 
-GameObjectClass* Factory::ReturnCreateObject(GameObjectType objType, Point2f pos)
+GameObjectClass* Factory::ReturnCreateObject(GameObjectType objType, Point2f pos, Vector2f vel)
 {
 	switch (objType)
 	{
@@ -86,24 +78,18 @@ GameObjectClass* Factory::ReturnCreateObject(GameObjectType objType, Point2f pos
 		break;
 
 	case TYPE_AGENT8:
-		return new Agent8(TYPE_AGENT8, pos, "agent8");
+		return new Agent8(TYPE_AGENT8, pos, vel, "agent8");
 		break;
 
 	case TYPE_FAN:
 	{
-		Fan* f = new Fan(TYPE_FAN, pos, "fan");
-		f->SetVelocity({ 0,3 });
-		f->SetAnimationSpeed(1.0f);
-		return f;
+		return new Fan(TYPE_FAN, pos, vel, "fan");
 		break;
 	}
 
 	case TYPE_COIN:
 	{
-		Coin* c = new Coin(TYPE_COIN, pos, "coin");
-		c->SetVelocity({ -3, 0 });
-		c->SetRotationSpeed(0.1f);
-		return c;
+		return new Coin(TYPE_COIN, pos, vel, "coin");
 		break;
 	}
 
@@ -113,14 +99,13 @@ GameObjectClass* Factory::ReturnCreateObject(GameObjectType objType, Point2f pos
 
 		if (Play::RandomRoll(2) == 1)
 		{
-			Tools* t = new Tools(TYPE_TOOL, pos, "spanner");
-			//obj_tool.radius = 100;
+			Tools* t = new Tools(TYPE_TOOL, pos, vel, "spanner");
 			t->SetVelocity({ -4, 0 });
 			t->SetRotationSpeed(0.1f);
 		}
 		else
 		{
-			Tools* t = new Tools(TYPE_TOOL, pos, "driver");
+			Tools* t = new Tools(TYPE_TOOL, pos, vel, "driver");
 			t->SetVelocity({ -8, Play::RandomRollRange(-1, 1) * 6 });
 		}
 
@@ -130,20 +115,13 @@ GameObjectClass* Factory::ReturnCreateObject(GameObjectType objType, Point2f pos
 
 	case TYPE_STAR:
 	{
-		Star* s = new Star(TYPE_STAR, pos, "star");
-		s->SetRotation(0.1f);
-		s->SetAcceleration({ 0.0f, 0.5f });
-
-		return s;
+		return new Star(TYPE_STAR, pos, vel, "star");
 		break;
 	}
 
 	case TYPE_LASER:
 	{
-		Laser* l = new Laser(TYPE_LASER, pos, "laser");
-		l->SetVelocity({ 32, 0 });
-
-		return l;
+		return new Laser(TYPE_LASER, pos, vel, "laser");
 		break;
 	}
 

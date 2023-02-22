@@ -5,7 +5,7 @@ std::vector<GameObjectClass*> GameObjectClass::s_vpGameObjectList; // Must manua
 GameObjectClass* GameObjectClass::s_pPlayer;
 int* GameObjectClass::s_pScore;
 
-GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, std::string spriteName)
+GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName)
 {
 	m_type = objType;
 
@@ -13,6 +13,7 @@ GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, std::
 	m_spriteID = PlayGraphics::Instance().GetSpriteId(m_spriteName.c_str()); // .c_str turns a string into a const char*
 	m_frame = 1;
 	m_position = position;
+	m_velocity = velocity;
 
 	// The sprite starts in the top left pixel so we need to divide the width and the height to get them to align with the center
 	m_spriteWidth = Play::GetSpriteWidth(m_spriteID) / 2;

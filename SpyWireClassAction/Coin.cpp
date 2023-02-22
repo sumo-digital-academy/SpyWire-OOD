@@ -20,7 +20,7 @@ void Coin::OnCollision()
 {
 	for (float rad{ 0.25f }; rad < 2.0f; rad += 0.5f)
 	{
-		GameObjectClass* star = Factory::ReturnCreateObject(TYPE_STAR, GetPlayer()->GetPosition());
+		GameObjectClass* star = Factory::ReturnCreateObject(TYPE_STAR, GetPlayer()->GetPosition(), { 0, 0 });
 
 		float angle = rad * PLAY_PI;
 		star->SetVelocity({ SPEED * sin(angle), SPEED * -cos(angle) });

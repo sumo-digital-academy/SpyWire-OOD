@@ -26,8 +26,8 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 	Play::CentreAllSpriteOrigins();
 	Play::LoadBackground("Data\\Backgrounds\\background.png");
 	Play::StartAudioLoop("music");
-	Factory::CreateObject(TYPE_AGENT8, { 115, 0 });
-	Factory::CreateObject(TYPE_FAN, { 1130, 250 });
+	Factory::CreateObject(TYPE_AGENT8, { 115, 0 }, { 0, 0 });
+	Factory::CreateObject(TYPE_FAN, { 1130, 250 }, { 0, 3 });
 }
 
 // Called by PlayBuffer every frame (60 times a second!)

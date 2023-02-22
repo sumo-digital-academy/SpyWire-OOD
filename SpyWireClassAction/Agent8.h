@@ -7,7 +7,7 @@ class Agent8
 	: public GameObjectClass
 {
 public:
-	Agent8(GameObjectType objType, Point2f position, std::string spriteName);
+	Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName);
 	~Agent8() {};
 
 	void Update() override;
