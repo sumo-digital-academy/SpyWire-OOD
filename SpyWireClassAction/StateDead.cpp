@@ -3,6 +3,7 @@
 #include "Play.h"
 #include "Agent8.h"
 #include "StateDead.h"
+#include "GameObjectManager.h"
 
 void StateDead::Update(Agent8* player)
 {
@@ -17,7 +18,7 @@ void StateDead::Update(Agent8* player)
 		player->SetFrame(0);
 		Play::StartAudioLoop("music");
 		player->Respawn();
-		*player->GetScorePointer() = 0;
+		*GameObjectManager::GetScorePointer() = 0;
 		for (int id_obj : Play::CollectGameObjectIDsByType(TYPE_TOOL)) // remove this later for classes
 			Play::GetGameObject(id_obj).type = TYPE_DESTROYED;
 	}

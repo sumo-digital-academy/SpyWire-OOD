@@ -2,13 +2,13 @@
 #include "Play.h"
 #include "Coin.h"
 #include "StateBaseClass.h"
-#include "Factory.h"
+#include "GameObjectManager.h"
 
 static constexpr int SPEED = 16;
 
 void Coin::Update()
 {
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, s_pPlayer))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, GameObjectManager::GetPlayer()))
 		OnCollision();
 
 	UpdateMovement();
@@ -20,12 +20,12 @@ void Coin::OnCollision()
 {
 	for (float rad{ 0.25f }; rad < 2.0f; rad += 0.5f)
 	{
-		GameObjectClass* star = Factory::CreateObject(TYPE_STAR, GetPlayer()->GetPosition(), { 0, 0 });
+		GameObjectClass* star = GameObjectManager::CreateObject(TYPE_STAR, GameObjectManager::GetPlayer()->GetPosition(), { 0, 0 });
 
 		float angle = rad * PLAY_PI;
 		star->SetVelocity({ SPEED * sin(angle), SPEED * -cos(angle) });
 	}
-	*s_pScore += 500; // turn the pointer from a memory address to the int value
+	*GameObjectManager::GetScorePointer() += 500; // turn the pointer from a memory address to the int value
 	Play::PlayAudio("collect");
 	m_destroy = true;
 }

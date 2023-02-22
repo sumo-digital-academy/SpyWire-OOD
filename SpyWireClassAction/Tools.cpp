@@ -1,10 +1,11 @@
 #include "Play.h"
 #include "Tools.h"
 #include "StateBaseClass.h"
+#include "GameObjectManager.h"
 
 void Tools::Update()
 {
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, s_pPlayer))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, GameObjectManager::GetPlayer()))
 	{
 		Play::StopAudioLoop("music");
 		Play::PlayAudio("die");

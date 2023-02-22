@@ -3,7 +3,7 @@
 #include "Play.h"
 #include "Agent8.h"
 #include "StatePlay.h"
-#include "Factory.h"
+#include "GameObjectManager.h"
 
 void StatePlay::Update(Agent8* player)
 {
@@ -36,7 +36,7 @@ void StatePlay::Update(Agent8* player)
 	if (Play::KeyPressed(VK_SPACE))
 	{
 		Vector2D firePos = player->GetPosition() + Vector2D(155, -75);
-		Factory::CreateObject(TYPE_LASER, firePos, { 32, 0 });
+		GameObjectManager::CreateObject(TYPE_LASER, firePos, { 32, 0 });
 		Play::PlayAudio("shoot");
 	}
 }

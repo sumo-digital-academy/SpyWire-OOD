@@ -5,7 +5,7 @@
 #include "GameObjectClass.h"
 #include "StateBaseClass.h"
 
-#include "Factory.h"
+#include "GameObjectManager.h"
 
 int DISPLAY_WIDTH = 1280;
 int DISPLAY_HEIGHT = 720;
@@ -21,24 +21,24 @@ GameState gameState;
 // The entry point for a PlayBuffer program
 void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 {
-	GameObjectClass::SetScorePointer(&gameState.score); // Getting a pointer to the gameState's score so we can access it from all classes using GameObjectClass
+	GameObjectManager::SetScorePointer(&gameState.score); // Getting a pointer to the gameState's score so we can access it from all classes using GameObjectClass
 
 	Play::CreateManager( DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE );
 	Play::CentreAllSpriteOrigins();
 	Play::LoadBackground("Data\\Backgrounds\\background.png");
 	Play::StartAudioLoop("music");
-	Factory::CreateObject(TYPE_AGENT8, { 115, 0 }, { 0, 0 });
-	Factory::CreateObject(TYPE_FAN, { 1130, 250 }, { 0, 3 });
+	GameObjectManager::CreateObject(TYPE_AGENT8, { 115, 0 }, { 0, 0 });
+	GameObjectManager::CreateObject(TYPE_FAN, { 1130, 250 }, { 0, 3 });
 }
 
 // Called by PlayBuffer every frame (60 times a second!)
 bool MainGameUpdate( float elapsedTime )
 {
 	Play::DrawBackground();
-	GameObjectClass::UpdateAll();
-	GameObjectClass::UpdateAllDestroyed();
-	GameObjectClass::RenderAll();
-	GameObjectClass::CleanUp();
+	GameObjectManager::UpdateAll();
+	GameObjectManager::UpdateAllDestroyed();
+	GameObjectManager::RenderAll();
+	GameObjectManager::CleanUp();
 
 	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP AND DOWN AND SPACE TO FIRE",
 		{ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
@@ -53,7 +53,7 @@ bool MainGameUpdate( float elapsedTime )
 int MainGameExit( void )
 {
 	//delete gameState.state;
-	GameObjectClass::DeleteAll();
+	GameObjectManager::DeleteAll();
 	StateBaseClass::DestroyEnd();
 	Play::DestroyManager();
 	return PLAY_OK;

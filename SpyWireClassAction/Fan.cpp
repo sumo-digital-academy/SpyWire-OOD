@@ -2,7 +2,7 @@
 
 #include "Play.h"
 #include "Fan.h"
-#include "Factory.h"
+#include "GameObjectManager.h"
 
 Fan::Fan(GameObjectType objType, Point2f pos, Vector2f velocity, std::string spriteName)
 	: GameObjectClass(objType, pos, velocity, spriteName)
@@ -14,13 +14,13 @@ void Fan::Update()
 {
 	if (Play::RandomRoll(50) == 50)
 	{
-		Factory::CreateObject(TYPE_TOOL, m_position, { -4, 0 });
+		GameObjectManager::CreateObject(TYPE_TOOL, m_position, { -4, 0 });
 		Play::PlayAudio("tool");
 	}
 
 	if (Play::RandomRoll(150) == 1)
 	{
-		Factory::CreateObject(TYPE_COIN, m_position, { -3, 0 });
+		GameObjectManager::CreateObject(TYPE_COIN, m_position, { -3, 0 });
 	}
 
 	UpdateMovement();

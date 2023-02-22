@@ -1,9 +1,14 @@
 #include "Play.h"
 #include "GameObjectClass.h"
+#include "GameObjectManager.h"
 
-std::vector<GameObjectClass*> GameObjectClass::s_vpGameObjectList; // Must manually initialize all static variables within a class.
-GameObjectClass* GameObjectClass::s_pPlayer;
-int* GameObjectClass::s_pScore;
+//extern std::vector<GameObjectClass*> s_vpGameObjectList;
+
+GameObjectClass::GameObjectClass() 
+{ 
+	GameObjectManager::s_vpGameObjectList.push_back(this);
+}; // default constructor - when you make a GameObject with no parameters
+
 
 GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName)
 {
@@ -20,59 +25,7 @@ GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vecto
 	m_spriteHeight = Play::GetSpriteHeight(m_spriteID) / 2;
 	m_radius = m_spriteWidth; // Auto setting each object's radius to be their sprite width - should find a better (box orientated) collision method.
 
-	s_vpGameObjectList.push_back(this); // <-- this will add all objects that use this constructor to the list of GameObjects
-}
-
-void GameObjectClass::UpdateAll()
-{
-	for (int i = 0; i < s_vpGameObjectList.size(); i++) // loop through each object in the list
-	{
-		if (s_vpGameObjectList[i]->GetObjectType() != TYPE_DESTROYED)
-		{
-			// and call their unique updates
-			s_vpGameObjectList[i]->Update();
-		}
-	}
-}
-
-void GameObjectClass::RenderAll()
-{
-	for (int i = 0; i < s_vpGameObjectList.size(); i++) // loop through each object in the list
-	{
-		// and draw them using their sprite name
-		if (s_vpGameObjectList[i]->GetRender())
-		{
-			GameObjectClass& obj = *s_vpGameObjectList[i]; // making a reference as to avoid typing out s_vpGameObjectList[i] each time we need it in the loop.
-
-			if (obj.m_spriteName != "") // This is to avoid drawing the states which don't have a sprite name 
-			{
-				int frame = static_cast<int>(obj.m_frame); // due to obj_frame being a float we will cast it to a int to get rid of the decimals
-				Play::DrawSpriteRotated(obj.m_spriteName.c_str(), obj.m_position, frame, obj.m_rotation);
-			}
-		}
-	}
-}
-
-void GameObjectClass::DeleteAll()
-{
-	for (int i = 0; i < s_vpGameObjectList.size(); i) // We are deleting every element in the list so no need to increase i as the vector will shrink the list as we delete
-	{
-		delete s_vpGameObjectList[i];
-		s_vpGameObjectList.erase(s_vpGameObjectList.begin());
-	}
-}
-
-void GameObjectClass::CleanUp()
-{
-	for (int i = 0; i < s_vpGameObjectList.size(); i++)
-	{
-		if (s_vpGameObjectList[i]->m_destroy) // if m_destroy == true
-		{
-			delete s_vpGameObjectList[i];
-			s_vpGameObjectList.erase(find(s_vpGameObjectList.begin(), s_vpGameObjectList.end(), s_vpGameObjectList[i]));
-			i--; // as we delete the vector array will move all elements backwards so we need to move i back by one
-		}
-	}
+	GameObjectManager::s_vpGameObjectList.push_back(this); // <-- this will add all objects that use this constructor to the list of GameObjects
 }
 
 void GameObjectClass::SetSpriteName(std::string spriteName, float animationSpeed) {
@@ -163,50 +116,10 @@ void GameObjectClass::UpdateMovement()
 
 void GameObjectClass::Respawn()
 {
-	for (int i = 0; i < s_vpGameObjectList.size(); i++)
+	for (int i = 0; i < GameObjectManager::s_vpGameObjectList.size(); i++)
 	{
-		if (s_vpGameObjectList[i]->m_type == TYPE_TOOL)
-			s_vpGameObjectList[i]->Destroy();
-	}
-}
-
-std::vector<GameObjectClass*> GameObjectClass::GetAllObjectsOfType(GameObjectType objType)
-{
-	std::vector<GameObjectClass*> listOfObjects{ nullptr };
-	for (int i = 0; i < s_vpGameObjectList.size(); i++)
-	{
-		if (s_vpGameObjectList[i]->m_type == objType)
-		{
-			listOfObjects.push_back(s_vpGameObjectList[i]);
-		}
-	}
-
-	return listOfObjects;
-}
-
-void GameObjectClass::UpdateAllDestroyed()
-{
-	for (int i = 0; i < s_vpGameObjectList.size(); i++) // loop through each object in the list
-	{
-		if (s_vpGameObjectList[i]->GetObjectType() == TYPE_DESTROYED)
-		{
-			s_vpGameObjectList[i]->SetAnimationSpeed(0.2f);
-			s_vpGameObjectList[i]->UpdateMovement();
-			s_vpGameObjectList[i]->UpdateAnimation();
-
-			int frame = s_vpGameObjectList[i]->GetFrame();
-			if (frame % 2)
-			{
-				s_vpGameObjectList[i]->SetRender(true);
-			}
-			else
-			{
-				s_vpGameObjectList[i]->SetRender(false);
-			}
-
-			if (s_vpGameObjectList[i]->IsOffDisplay() || frame >= 10)
-  				s_vpGameObjectList[i]->Destroy();
-		}
+		if (GameObjectManager::s_vpGameObjectList[i]->m_type == TYPE_TOOL)
+			GameObjectManager::s_vpGameObjectList[i]->Destroy();
 	}
 }
 

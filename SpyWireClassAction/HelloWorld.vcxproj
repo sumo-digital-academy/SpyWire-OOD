@@ -192,7 +192,7 @@
   <ItemGroup>
     <ClCompile Include="Agent8.cpp" />
     <ClCompile Include="Coin.cpp" />
-    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Fan.cpp" />
     <ClCompile Include="GameObjectClass.cpp" />
     <ClCompile Include="Laser.cpp" />
@@ -213,7 +213,7 @@
     <ClInclude Include="..\Play.h" />
     <ClInclude Include="Agent8.h" />
     <ClInclude Include="Coin.h" />
-    <ClInclude Include="Factory.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Fan.h" />
     <ClInclude Include="GameObjectClass.h" />
     <ClInclude Include="Laser.h" />

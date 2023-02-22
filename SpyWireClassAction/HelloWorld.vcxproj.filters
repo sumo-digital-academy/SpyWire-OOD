@@ -51,7 +51,7 @@
     <ClCompile Include="Fan.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
+    <ClCompile Include="GameObjectManager.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Star.cpp">
@@ -95,7 +95,7 @@
     <ClInclude Include="Fan.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Factory.h">
+    <ClInclude Include="GameObjectManager.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">

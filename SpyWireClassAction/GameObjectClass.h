@@ -15,18 +15,9 @@ enum GameObjectType // will need to copy this as there is not MainGame.h
 class GameObjectClass
 {
 public:
-	GameObjectClass() {	s_vpGameObjectList.push_back(this);	}; // default constructor - when when you make a GameObject with no parameters
+	GameObjectClass(); // default constructor - when you make a GameObject with no parameters
 	GameObjectClass( GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName);
 	virtual ~GameObjectClass() {};
-
-	static void UpdateAll();
-	static void RenderAll();
-	static void UpdateAllDestroyed();
-	static void DeleteAll(); // used to delete all objs
-	static void CleanUp(); // used to delete all objs marked for destruction at the end of each frame
-	static GameObjectClass* GetPlayer() { return s_pPlayer; }; // used to delete all objs marked for destruction at the end of each frame
-	static void SetPlayer(GameObjectClass* playerPointer) { s_pPlayer = playerPointer; }; // used to delete all objs marked for destruction at the end of each frame
-	static void SetScorePointer(int* scorePointer) { s_pScore = scorePointer; }; // used to alter the score within the gameState without needing to include it within this file cauing a loop with Agent8
 
 	virtual void Update() {};
 	virtual void OnCollision() {};
@@ -36,9 +27,7 @@ public:
 	bool IsLeavingDisplay();
 	bool IsLeavingDisplay(bool vertical, bool horizontal);
 	bool IsOffDisplay();
-
-	std::vector<GameObjectClass*> GetAllObjectsOfType(GameObjectType objType);
-
+	bool GetRender() { return m_render; };
 	void UpdateMovement();
 	void UpdateAnimation();
 	void Respawn();
@@ -58,14 +47,10 @@ public:
 	Vector2f GetPosition() { return m_position; };
 	float GetRotation() { return m_rotation; };
 	float GetFrame() { return m_frame; };
-	float GetSpriteID() { return m_spriteID; };
-	bool GetRender() { return m_render; };
-	int* GetScorePointer() { return s_pScore; };
+	int GetSpriteID() { return m_spriteID; };
 
 	GameObjectType GetObjectType() { return m_type; };
 protected:
-	static GameObjectClass* s_pPlayer; // static player pointer as there can only be one, that will be share by all (new and old) game objects
-	static int* s_pScore;
 
 	bool m_destroy{ false }; // used to tell when to switch states / destroy this state (can't even not have a state) - must be deleted at end of frame
 	bool m_render{ true };
@@ -89,6 +74,5 @@ protected:
 	GameObjectType m_type{ GameObjectType::TYPE_NULL };
 
 private:
-	static std::vector<GameObjectClass*> s_vpGameObjectList;
 };
 
