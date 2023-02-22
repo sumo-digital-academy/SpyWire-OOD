@@ -24,7 +24,7 @@ enum GameObjectType // will need to copy this as there is not MainGame.h
 class GameObjectClass
 {
 public:
-	GameObjectClass() {}; // default constructor - when when you make a GameObject with no parameters
+	GameObjectClass() {	s_vpGameObjectList.push_back(this);	}; // default constructor - when when you make a GameObject with no parameters
 	GameObjectClass( GameObjectType objType, Point2f position, std::string spriteName);
 	virtual ~GameObjectClass() {};
 

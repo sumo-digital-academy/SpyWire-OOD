@@ -7,12 +7,12 @@ void Tools::Update()
 {
 	Agent8* player = (Agent8*)s_pPlayer; // This will allow us to avoid type casting the player every time we need them.
 
-	if (player->GetStateType() != STATE_DEAD && CollisionTest(this, player))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, player))
 	{
 		Play::StopAudioLoop("music");
 		Play::PlayAudio("die");
 
-		player->GetStatePointer()->SwitchStates(STATE_DEAD);
+		StateBaseClass::SwitchStates(STATE_DEAD);
 	}
 	UpdateMovement();
 	UpdateAnimation();

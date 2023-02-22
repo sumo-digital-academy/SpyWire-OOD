@@ -2,6 +2,7 @@
 #include "Play.h"
 #include "Coin.h"
 #include "Agent8.h"
+#include "StateBaseClass.h"
 #include "Factory.h"
 
 static constexpr int SPEED = 16;
@@ -9,7 +10,7 @@ static constexpr int SPEED = 16;
 void Coin::Update()
 {
 	Agent8* player = (Agent8*)s_pPlayer;
-	if (player->GetStateType() != STATE_DEAD && CollisionTest(this, player))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, player))
 		OnCollision();
 
 	UpdateMovement();

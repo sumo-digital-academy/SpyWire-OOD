@@ -42,8 +42,12 @@ void GameObjectClass::RenderAll()
 		if (s_vpGameObjectList[i]->GetRender())
 		{
 			GameObjectClass& obj = *s_vpGameObjectList[i]; // making a reference as to avoid typing out s_vpGameObjectList[i] each time we need it in the loop.
-			int frame = static_cast<int>(obj.m_frame); // due to obj_frame being a float we will cast it to a int to get rid of the decimals
-			Play::DrawSpriteRotated(obj.m_spriteName.c_str(), obj.m_position, frame, obj.m_rotation);
+
+			if (obj.m_spriteName != "") // This is to avoid drawing the states which don't have a sprite name 
+			{
+				int frame = static_cast<int>(obj.m_frame); // due to obj_frame being a float we will cast it to a int to get rid of the decimals
+				Play::DrawSpriteRotated(obj.m_spriteName.c_str(), obj.m_position, frame, obj.m_rotation);
+			}
 		}
 	}
 }
