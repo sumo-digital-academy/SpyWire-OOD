@@ -7,6 +7,6 @@ public:
     StateHalt() : StateBaseClass() {};
     ~StateHalt() {};
 
-    void Update() override;
+    void Update(Agent8* player) override;
 };
 

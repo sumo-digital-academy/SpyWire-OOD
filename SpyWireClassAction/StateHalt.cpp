@@ -1,12 +1,12 @@
 #define PLAY_USING_GAMEOBJECT_MANAGER
 
 #include "Play.h"
+#include "Agent8.h"
 #include "StateHalt.h"
 
 
-void StateHalt::Update()
+void StateHalt::Update(Agent8* player)
 {
-	GameObjectClass* player = GameObjectClass::GetPlayer();
 	player->SetVelocity(player->GetVelocity() * 0.9f);
 	
 	int maxFrames = PlayGraphics::Instance().GetSpriteFrames(player->GetSpriteID()) - 1;

@@ -1,4 +1,5 @@
 #include "Play.h"
+#include "Agent8.h"
 #include "StateBaseClass.h"
 #include "StateAppear.h"
 #include "StatePlay.h"
@@ -13,6 +14,7 @@ void StateBaseClass::SwitchStates(Agent8State newState)
 	switch (newState)
 	{
 	case STATE_APPEAR:
+		// Note that it is fine to freely delete the state here as it is not in a list and the pointer is about to be replaces
 		s_pStatePointer->Destroy(); 
 		s_pStatePointer = new StateAppear;
 		s_state = STATE_APPEAR;

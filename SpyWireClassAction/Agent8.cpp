@@ -1,6 +1,6 @@
 #include "Play.h"
-#include "StateBaseClass.h"
 #include "Agent8.h"
+#include "StateBaseClass.h"
 
 Agent8::Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName)
 	: GameObjectClass(objType, position, velocity, spriteName)
@@ -12,6 +12,8 @@ Agent8::Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std:
 void Agent8::Update()
 {
 	UpdateMovement();
+
+	StateBaseClass::StateUpdate(this);
 
 	if (StateBaseClass::GetStateType() != STATE_APPEAR && StateBaseClass::GetStateType() != STATE_DEAD)
 	{

@@ -7,7 +7,7 @@ public:
     StateAppear() : StateBaseClass() {};
     ~StateAppear() {};
 
-    void Update() override;
+    void Update(Agent8* player) override;
 protected:
 private:
 };

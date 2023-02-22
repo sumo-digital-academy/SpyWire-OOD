@@ -1,13 +1,4 @@
 #pragma once
-
-enum Agent8State // <- copyed these here as there is no header to include for them - this will allow me to avoid #including the states in each other, as can be seen in SwitchStates(StateBaseClass* newState).
-{
-	STATE_APPEAR = 0,
-	STATE_HALT,
-	STATE_PLAY,
-	STATE_DEAD,
-};
-
 enum GameObjectType // will need to copy this as there is not MainGame.h
 {
 	TYPE_NULL = -1,
@@ -69,6 +60,7 @@ public:
 	float GetFrame() { return m_frame; };
 	float GetSpriteID() { return m_spriteID; };
 	bool GetRender() { return m_render; };
+	int* GetScorePointer() { return s_pScore; };
 
 	GameObjectType GetObjectType() { return m_type; };
 protected:

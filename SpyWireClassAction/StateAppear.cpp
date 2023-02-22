@@ -1,15 +1,14 @@
 #define PLAY_USING_GAMEOBJECT_MANAGER
 
 #include "Play.h"
+#include "Agent8.h"
 #include "StateAppear.h"
 #include "StatePlay.h"
 
 extern int DISPLAY_HEIGHT;
 
-void StateAppear::Update()
+void StateAppear::Update(Agent8* player)
 {
-	GameObjectClass* player = GameObjectClass::GetPlayer();
-
 	player->SetVelocity({ 0, 12 });
 	player->SetAcceleration({ 0, 0.5f });
 	player->SetSpriteName("agent8_fall", 0.0f);

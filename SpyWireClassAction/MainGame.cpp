@@ -3,6 +3,7 @@
 
 #include "Play.h"
 #include "GameObjectClass.h"
+#include "StateBaseClass.h"
 
 #include "Factory.h"
 
@@ -53,6 +54,7 @@ int MainGameExit( void )
 {
 	//delete gameState.state;
 	GameObjectClass::DeleteAll();
+	StateBaseClass::DestroyEnd();
 	Play::DestroyManager();
 	return PLAY_OK;
 }

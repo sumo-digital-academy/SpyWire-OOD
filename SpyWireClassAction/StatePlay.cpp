@@ -1,13 +1,12 @@
 #define PLAY_USING_GAMEOBJECT_MANAGER
 
 #include "Play.h"
+#include "Agent8.h"
 #include "StatePlay.h"
 #include "Factory.h"
 
-void StatePlay::Update()
+void StatePlay::Update(Agent8* player)
 {
-	GameObjectClass* player = GameObjectClass::GetPlayer();
-
 	if (Play::KeyDown(VK_UP))
 	{
 		player->SetVelocity({ 0, -4 });

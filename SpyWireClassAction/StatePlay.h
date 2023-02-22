@@ -7,5 +7,5 @@ public:
     StatePlay() : StateBaseClass() {};
     ~StatePlay() {};
 
-    void Update() override;
+    void Update(Agent8* player) override;
 };
