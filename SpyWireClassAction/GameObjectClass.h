@@ -1,9 +1,8 @@
 #pragma once
-enum GameObjectType // will need to copy this as there is not MainGame.h
+enum GameObjectType
 {
 	TYPE_NULL = -1,
 	TYPE_AGENT8,
-	TYPE_AGENT8_STATE,
 	TYPE_FAN,
 	TYPE_TOOL,
 	TYPE_COIN,
