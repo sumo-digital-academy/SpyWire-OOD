@@ -38,7 +38,6 @@ GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f
 
 	case TYPE_TOOL:
 	{
-		Tools* t = nullptr;
 		Tools* t = new Tools(TYPE_TOOL, pos, vel, "");
 
 		return t;
