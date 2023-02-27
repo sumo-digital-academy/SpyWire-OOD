@@ -39,18 +39,7 @@ GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f
 	case TYPE_TOOL:
 	{
 		Tools* t = nullptr;
-
-		if (Play::RandomRoll(2) == 1)
-		{
-			Tools* t = new Tools(TYPE_TOOL, pos, vel, "spanner");
-			t->SetVelocity({ -4, 0 });
-			t->SetRotationSpeed(0.1f);
-		}
-		else
-		{
-			Tools* t = new Tools(TYPE_TOOL, pos, vel, "driver");
-			t->SetVelocity({ -8, Play::RandomRollRange(-1, 1) * 6 });
-		}
+		Tools* t = new Tools(TYPE_TOOL, pos, vel, "");
 
 		return t;
 		break;
@@ -105,11 +94,11 @@ void GameObjectManager::RenderAll()
 
 void GameObjectManager::DeleteAll()
 {
-	for (int i = 0; i < s_vpGameObjectList.size(); i) // We are deleting every element in the list so no need to increase i as the vector will shrink the list as we delete
+	for (int i = 0; i < s_vpGameObjectList.size(); i++) // We are deleting every element in the list so no need to increase i as the vector will shrink the list as we delete
 	{
 		delete s_vpGameObjectList[i];
-		s_vpGameObjectList.erase(s_vpGameObjectList.begin());
 	}
+	s_vpGameObjectList.clear();
 }
 
 void GameObjectManager::CleanUp()
@@ -151,18 +140,39 @@ void GameObjectManager::UpdateAllDestroyed()
 	}
 }
 
-std::vector<GameObjectClass*> GameObjectManager::GetAllObjectsOfType(GameObjectType objType)
+int GameObjectManager::GetAllObjectsOfType(GameObjectType objType, std::vector<GameObjectClass*>& objList)
 {
-	std::vector<GameObjectClass*> listOfObjects{ nullptr };
+	objList.clear();
+
+	int count = 0;
 	for (int i = 0; i < s_vpGameObjectList.size(); i++)
 	{
 		if (s_vpGameObjectList[i]->GetObjectType() == objType)
 		{
-			listOfObjects.push_back(s_vpGameObjectList[i]);
+			objList.push_back(s_vpGameObjectList[i]);
+			count++;
 		}
 	}
 
-	return listOfObjects;
+	return count;
+}
+
+int GameObjectManager::GetAllObjectsOfType(GameObjectType objType, std::vector<GameObjectClass*>& objList, bool clearList)
+{
+	if (clearList == true)
+		objList.clear();
+
+	int count = 0;
+	for (int i = 0; i < s_vpGameObjectList.size(); i++)
+	{
+		if (s_vpGameObjectList[i]->GetObjectType() == objType)
+		{
+			objList.push_back(s_vpGameObjectList[i]);
+			count++;
+		}
+	}
+
+	return count;
 }
 
 void GameObjectManager::RemoveTools() // used on respawning
@@ -171,5 +181,14 @@ void GameObjectManager::RemoveTools() // used on respawning
 	{
 		if (s_vpGameObjectList[i]->GetObjectType() == TYPE_TOOL)
 			s_vpGameObjectList[i]->Destroy();
+	}
+}
+
+void GameObjectManager::DeleteGameObjectsByType(GameObjectType type)
+{
+	for (int i = 0; i < s_vpGameObjectList.size(); i++)
+	{
+		if (s_vpGameObjectList[i]->GetObjectType() == type)
+			s_vpGameObjectList[i]->Destroy(); // <-- remember this funtion does not immediatly destroy the objects but sets them to be deleted later
 	}
 }

@@ -11,7 +11,7 @@ void StateAppear::Update(Agent8* player)
 {
 	player->SetVelocity({ 0, 12 });
 	player->SetAcceleration({ 0, 0.5f });
-	player->SetSpriteName("agent8_fall", 0.0f);
+	player->SetSprite("agent8_fall", 0.0f);
 	player->SetRotation(0);
 
 	if (player->GetPosition().y >= DISPLAY_HEIGHT / 3)

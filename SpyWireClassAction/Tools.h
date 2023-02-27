@@ -5,8 +5,7 @@ class Tools
 	: public GameObjectClass
 {
 public:
-	Tools(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName)
-		: GameObjectClass(objType, position, velocity, spriteName) {};
+	Tools(GameObjectType objType, Point2f position, Vector2f velocity, std::string spriteName);
 
 	~Tools() {};
 

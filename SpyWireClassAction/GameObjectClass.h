@@ -29,12 +29,11 @@ public:
 	bool GetRender() { return m_render; };
 	void UpdateMovement();
 	void UpdateAnimation();
-	void Respawn();
 	void Destroy();
 	void SetVelocity(Vector2f velocity) { m_velocity = velocity; };
 	void SetAcceleration(Vector2f acceleration) { m_acceleration = acceleration; };
 	void SetPosition(Point2f pos) { m_position = pos; };
-	void SetSpriteName(std::string spriteName, float animationSpeed);
+	void SetSprite(std::string spriteName, float animationSpeed);
 	void SetAnimationSpeed(float animationSpeed) { m_animationSpeed = animationSpeed; };
 	void SetRotation(float rotation) { m_rotation = rotation; };
 	void SetRotationSpeed(float rotationSpeed) { m_rotationSpeed = rotationSpeed; };
@@ -51,13 +50,11 @@ public:
 	GameObjectType GetObjectType() { return m_type; };
 protected:
 
-	bool m_destroy{ false }; // used to tell when to switch states / destroy this state (can't even not have a state) - must be deleted at end of frame
-	bool m_render{ true };
+	Point2f m_position{ 0, 0 };
+	Point2f m_oldPosition{ 0, 0 };
+	Vector2f m_velocity{ 0, 0 };
+	Vector2f m_acceleration{ 0, 0 };
 
-	std::string m_spriteName{ "" };
-	int m_spriteID{ -1 };
-	int m_spriteWidth{ -1 };
-	int m_spriteHeight{ -1 };
 	float m_frame{ -1 };
 	float m_frameTimer{ 0 };
 	float m_rotation{ 0 };
@@ -65,10 +62,12 @@ protected:
 	float m_animationSpeed{ 1 }; // animations can have a default speed of 1
 	float m_radius{ -1 };
 
-	Point2f m_position{ 0, 0 };
-	Point2f m_oldPosition{ 0, 0 };
-	Vector2f m_velocity{ 0, 0 };
-	Vector2f m_acceleration{ 0, 0 };
+	int m_spriteID{ -1 };
+	int m_spriteWidth{ -1 };
+	int m_spriteHeight{ -1 };
+	
+	bool m_destroy{ false }; // used to tell when to switch states / destroy this state (can't even not have a state) - must be deleted at end of frame
+	bool m_render{ true };
 
 	GameObjectType m_type{ GameObjectType::TYPE_NULL };
 

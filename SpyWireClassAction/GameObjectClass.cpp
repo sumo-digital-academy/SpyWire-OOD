@@ -6,7 +6,7 @@
 
 GameObjectClass::GameObjectClass() 
 { 
-	GameObjectManager::s_vpGameObjectList.push_back(this);
+	GameObjectManager::RegisterGameObject(this);
 }; // default constructor - when you make a GameObject with no parameters
 
 
@@ -14,8 +14,7 @@ GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vecto
 {
 	m_type = objType;
 
-	m_spriteName = spriteName;
-	m_spriteID = PlayGraphics::Instance().GetSpriteId(m_spriteName.c_str()); // .c_str turns a string into a const char*
+	m_spriteID = PlayGraphics::Instance().GetSpriteId(spriteName.c_str()); // .c_str turns a string into a const char*
 	m_frame = 1;
 	m_position = position;
 	m_velocity = velocity;
@@ -25,12 +24,11 @@ GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vecto
 	m_spriteHeight = Play::GetSpriteHeight(m_spriteID) / 2;
 	m_radius = m_spriteWidth; // Auto setting each object's radius to be their sprite width - should find a better (box orientated) collision method.
 
-	GameObjectManager::s_vpGameObjectList.push_back(this); // <-- this will add all objects that use this constructor to the list of GameObjects
+	GameObjectManager::RegisterGameObject(this); // <-- this will add all objects that use this constructor to the list of GameObjects
 }
 
-void GameObjectClass::SetSpriteName(std::string spriteName, float animationSpeed) {
-	m_spriteName = spriteName;
-	m_spriteID = PlayGraphics::Instance().GetSpriteId(m_spriteName.c_str());
+void GameObjectClass::SetSprite(std::string spriteName, float animationSpeed) {
+	m_spriteID = PlayGraphics::Instance().GetSpriteId(spriteName.c_str());
 	m_animationSpeed = animationSpeed;
 };
 
@@ -112,15 +110,6 @@ void GameObjectClass::UpdateMovement()
 	m_oldPosition = m_position;
 	m_velocity += m_acceleration;
 	m_position += m_velocity;
-}
-
-void GameObjectClass::Respawn()
-{
-	for (int i = 0; i < GameObjectManager::s_vpGameObjectList.size(); i++)
-	{
-		if (GameObjectManager::s_vpGameObjectList[i]->m_type == TYPE_TOOL)
-			GameObjectManager::s_vpGameObjectList[i]->Destroy();
-	}
 }
 
 void GameObjectClass::Destroy()

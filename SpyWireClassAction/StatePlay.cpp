@@ -10,24 +10,24 @@ void StatePlay::Update(Agent8* player)
 	if (Play::KeyDown(VK_UP))
 	{
 		player->SetVelocity({ 0, -4 });
-		player->SetSpriteName("agent8_climb", 0.25f);
+		player->SetSprite("agent8_climb", 0.25f);
 	}
 	else if (Play::KeyDown(VK_DOWN))
 	{
 		player->SetAcceleration({ 0, 1 });
-		player->SetSpriteName("agent8_fall", 0.0f);
+		player->SetSprite("agent8_fall", 0.0f);
 	}
 	else
 	{
 		if (player->GetVelocity().y > 5)
 		{
 			SwitchStates(STATE_HALT);
-			player->SetSpriteName("agent8_halt", 0.333f);
+			player->SetSprite("agent8_halt", 0.333f);
 			player->SetAcceleration({ 0, 0 });
 		}
 		else
 		{
-			player->SetSpriteName("agent8_hang", 0.02f);
+			player->SetSprite("agent8_hang", 0.02f);
 			player->SetVelocity(player->GetVelocity() * 0.5f);
 			player->SetAcceleration({ 0, 0 });
 		}

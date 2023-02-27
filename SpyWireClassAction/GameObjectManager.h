@@ -19,11 +19,16 @@ public:
 
 	static int* GetScorePointer() { return s_pScore; };
 
-	static std::vector<GameObjectClass*> GetAllObjectsOfType(GameObjectType objType);
+	static int GetAllObjectsOfType(GameObjectType objType, std::vector<GameObjectClass*>& objList); // int is the number objects added to the list.
+	static int GetAllObjectsOfType(GameObjectType objType, std::vector<GameObjectClass*>& objList, bool clearList); // int is the number objects added to the list - clear list will clear the list before adding (is on by default).
 
-	static std::vector<GameObjectClass*> s_vpGameObjectList;
+
+	static void RegisterGameObject(GameObjectClass* obj) { s_vpGameObjectList.push_back(obj); };
+	static void DeleteGameObjectsByType(GameObjectType type);
 protected:
 private:
+	static std::vector<GameObjectClass*> s_vpGameObjectList; // Must never be used outside of the GameObject Manager for code safety reasons - mainly stuff being deleted
+
 	static GameObjectClass* s_pPlayer; // static player pointer as there can only be one, that will be share by all (new and old) game objects
 	static int* s_pScore;
 

@@ -9,5 +9,8 @@ public:
 
     void Update() override;
     void CollisionUpdateLoop();
+
+private:
+	std::vector<GameObjectClass*> m_collsionCheckList;
 };
 
