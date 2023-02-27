@@ -12,9 +12,9 @@ Agent8::Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std:
 
 void Agent8::Update()
 {
-	UpdateMovement();
-
 	StateBaseClass::StateUpdate(this);
+
+	UpdateMovement();
 
 	if (StateBaseClass::GetStateType() != STATE_APPEAR && StateBaseClass::GetStateType() != STATE_DEAD)
 	{
