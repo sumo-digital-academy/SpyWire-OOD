@@ -37,9 +37,7 @@ GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f
 
 	case TYPE_TOOL:
 	{
-		Tools* t = new Tools(TYPE_TOOL, pos, vel, "");
-
-		return t;
+		return new Tools(TYPE_TOOL, pos, vel, "");
 		break;
 	}
 
