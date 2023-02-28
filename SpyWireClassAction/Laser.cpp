@@ -21,13 +21,13 @@ void Laser::CollisionUpdateLoop()
 		{
 			m_collsionCheckList[i]->Destroy();
 			m_destroy = true;
-			((Agent8*)GameObjectManager::GetPlayer())->AddScore(100);
+			((Agent8*)GameObjectManager::GetPlayer(0))->AddScore(100);
 		}
 	}
 
-	int numberOfObjects = GameObjectManager::GetAllObjectsOfType(TYPE_COIN, m_collsionCheckList); // this function will erase everything in the list
+ 	int numberOfObjects = GameObjectManager::GetAllObjectsOfType(TYPE_COIN, m_collsionCheckList); // this function will erase everything in the list
 
-	if (numberOfObjects < 0)
+	if (numberOfObjects > 0)
 	{
 		for (int i = 0; i < m_collsionCheckList.size(); i++)
 		{
@@ -36,11 +36,11 @@ void Laser::CollisionUpdateLoop()
 				m_collsionCheckList[i]->Destroy();
 				m_destroy = true;
 				Play::PlayAudio("error");
-				((Agent8*)GameObjectManager::GetPlayer())->AddScore(-300);
+				((Agent8*)GameObjectManager::GetPlayer(0))->AddScore(-300);
 			}
 		}
 
-		if (((Agent8*)GameObjectManager::GetPlayer())->GetScore() < 0)
-			((Agent8*)GameObjectManager::GetPlayer())->ResetScore();
+		if (((Agent8*)GameObjectManager::GetPlayer(0))->GetScore() < 0)
+			((Agent8*)GameObjectManager::GetPlayer(0))->ResetScore();
 	}
 }

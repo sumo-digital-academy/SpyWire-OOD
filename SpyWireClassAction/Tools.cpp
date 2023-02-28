@@ -21,7 +21,7 @@ Tools::Tools(GameObjectType objTypes, Point2f position, Vector2f velocity, std::
 
 void Tools::Update()
 {
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, GameObjectManager::GetPlayer()))
+	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, GameObjectManager::GetPlayer(0)))
 	{
 		Play::StopAudioLoop("music");
 		Play::PlayAudio("die");

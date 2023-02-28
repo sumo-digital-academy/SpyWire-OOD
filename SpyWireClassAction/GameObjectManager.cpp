@@ -9,7 +9,7 @@
 #include "Laser.h"
 
 std::vector<GameObjectClass*> GameObjectManager::s_vpGameObjectList; // Must manually initialize all static variables within a class.
-GameObjectClass* GameObjectManager::s_pPlayer;
+std::vector<GameObjectClass*> GameObjectManager::s_pPlayerList;
 
 GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f pos, Vector2f vel)
 {
@@ -187,4 +187,48 @@ void GameObjectManager::DeleteGameObjectsByType(GameObjectType type)
 		if (s_vpGameObjectList[i]->GetObjectType() == type)
 			s_vpGameObjectList[i]->Destroy(); // <-- remember this funtion does not immediatly destroy the objects but sets them to be deleted later
 	}
+}
+
+int GameObjectManager::GetAllPlayer(std::vector<GameObjectClass*>& list)
+{
+	int count = 0;
+
+	list.clear();
+	for (int i = 0; i < s_pPlayerList.size(); i++)
+	{
+		list.push_back(s_pPlayerList[i]);
+		count++;
+	}
+
+	return count; // returns the number of players
+}
+
+int GameObjectManager::GetAllPlayer(std::vector<GameObjectClass*>& list, bool clearList)
+{
+	int count = 0;
+	if (clearList)
+	{
+		list.clear();
+
+		for (int i = 0; i < s_pPlayerList.size(); i++)
+		{
+			list.push_back(s_pPlayerList[i]);
+			count++;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < s_pPlayerList.size(); i++)
+		{
+			// If the player is not in the list add then
+			// Avoids the player being added, and possibly updated, twice.
+			if (std::find(list.begin(), list.end(), s_pPlayerList[i]) != list.end())
+			{
+				list.push_back(s_pPlayerList[i]);
+				count++;
+			}
+		}
+	}
+
+	return count;
 }

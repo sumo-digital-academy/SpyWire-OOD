@@ -18,7 +18,7 @@ void StateDead::Update(Agent8* player)
 		player->SetFrame(0);
 		Play::StartAudioLoop("music");
 		GameObjectManager::DeleteGameObjectsByType(TYPE_TOOL);
-		((Agent8*)GameObjectManager::GetPlayer())->ResetScore();
+		((Agent8*)GameObjectManager::GetPlayer(0))->ResetScore();
 		for (int id_obj : Play::CollectGameObjectIDsByType(TYPE_TOOL)) // remove this later for classes
 			Play::GetGameObject(id_obj).type = TYPE_DESTROYED;
 	}

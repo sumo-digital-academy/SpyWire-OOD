@@ -34,7 +34,7 @@ bool MainGameUpdate( float elapsedTime )
 
 	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP AND DOWN AND SPACE TO FIRE",
 		{ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
-	Play::DrawFontText("132px", "SCORE: " + std::to_string(((Agent8*)GameObjectManager::GetPlayer())->GetScore()),
+	Play::DrawFontText("132px", "SCORE: " + std::to_string(((Agent8*)GameObjectManager::GetPlayer(0))->GetScore()),
 		{ DISPLAY_WIDTH / 2, 50 }, Play::CENTRE);
 
 	Play::PresentDrawingBuffer();

@@ -7,7 +7,7 @@ Agent8::Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std:
 	: GameObjectClass(objType, position, velocity, spriteName)
 {
 	// as there should only be a single player using this constructor we can set the player in the base class to equal this
-	GameObjectManager::SetPlayer(this);
+	GameObjectManager::AddPlayer(this);
 }
 
 void Agent8::Update()
