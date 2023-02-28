@@ -10,7 +10,6 @@
 
 std::vector<GameObjectClass*> GameObjectManager::s_vpGameObjectList; // Must manually initialize all static variables within a class.
 GameObjectClass* GameObjectManager::s_pPlayer;
-int* GameObjectManager::s_pScore;
 
 GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f pos, Vector2f vel)
 {

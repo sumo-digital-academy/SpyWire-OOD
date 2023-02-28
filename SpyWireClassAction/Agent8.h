@@ -11,8 +11,12 @@ public:
 	~Agent8() {};
 
 	void Update() override;
+	void AddScore(int x) { m_score += x; };
+	void ResetScore() {	m_score = 0;};
+	int GetScore() { return m_score; };
 
 protected:
 private:
+	int m_score{ 0 };
 };
 

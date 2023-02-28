@@ -1,6 +1,7 @@
 #include "Play.h"
 #include "Laser.h"
 #include "GameObjectManager.h"
+#include "Agent8.h"
 
 void Laser::Update()
 {
@@ -20,7 +21,7 @@ void Laser::CollisionUpdateLoop()
 		{
 			m_collsionCheckList[i]->Destroy();
 			m_destroy = true;
-			*GameObjectManager::GetScorePointer() += 100;
+			((Agent8*)GameObjectManager::GetPlayer())->AddScore(100);
 		}
 	}
 
@@ -35,11 +36,11 @@ void Laser::CollisionUpdateLoop()
 				m_collsionCheckList[i]->Destroy();
 				m_destroy = true;
 				Play::PlayAudio("error");
-				*GameObjectManager::GetScorePointer() -= 300;
+				((Agent8*)GameObjectManager::GetPlayer())->AddScore(-300);
 			}
 		}
 
-		if (*GameObjectManager::GetScorePointer() < 0)
-			*GameObjectManager::GetScorePointer() = 0;
+		if (((Agent8*)GameObjectManager::GetPlayer())->GetScore() < 0)
+			((Agent8*)GameObjectManager::GetPlayer())->ResetScore();
 	}
 }

@@ -3,6 +3,7 @@
 #include "Coin.h"
 #include "StateBaseClass.h"
 #include "GameObjectManager.h"
+#include "Agent8.h"
 
 static constexpr int SPEED = 16;
 
@@ -25,7 +26,7 @@ void Coin::OnCollision()
 		float angle = rad * PLAY_PI;
 		star->SetVelocity({ SPEED * sin(angle), SPEED * -cos(angle) });
 	}
-	*GameObjectManager::GetScorePointer() += 500; // turn the pointer from a memory address to the int value
+	((Agent8*)GameObjectManager::GetPlayer())->AddScore(500); // turn the pointer from a memory address to the int value
 	Play::PlayAudio("collect");
 	m_destroy = true;
 }

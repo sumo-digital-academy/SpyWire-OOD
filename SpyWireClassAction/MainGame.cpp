@@ -6,23 +6,15 @@
 #include "StateBaseClass.h"
 
 #include "GameObjectManager.h"
+#include "Agent8.h"
 
 int DISPLAY_WIDTH = 1280;
 int DISPLAY_HEIGHT = 720;
 int DISPLAY_SCALE = 1;
 
-struct GameState
-{
-	int score = 0;
-};
-
-GameState gameState;
-
 // The entry point for a PlayBuffer program
 void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
 {
-	GameObjectManager::SetScorePointer(&gameState.score); // Getting a pointer to the gameState's score so we can access it from all classes using GameObjectClass
-
 	Play::CreateManager( DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE );
 	Play::CentreAllSpriteOrigins();
 	Play::LoadBackground("Data\\Backgrounds\\background.png");
@@ -42,7 +34,7 @@ bool MainGameUpdate( float elapsedTime )
 
 	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP AND DOWN AND SPACE TO FIRE",
 		{ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
-	Play::DrawFontText("132px", "SCORE: " + std::to_string(gameState.score),
+	Play::DrawFontText("132px", "SCORE: " + std::to_string(((Agent8*)GameObjectManager::GetPlayer())->GetScore()),
 		{ DISPLAY_WIDTH / 2, 50 }, Play::CENTRE);
 
 	Play::PresentDrawingBuffer();
