@@ -4,7 +4,7 @@ class StateAppear :
     public StateBaseClass
 {
 public:
-    StateAppear() : StateBaseClass() {};
+    StateAppear(Agent8* player) : StateBaseClass(player) {};
     ~StateAppear() {};
 
     void Update(Agent8* player) override;

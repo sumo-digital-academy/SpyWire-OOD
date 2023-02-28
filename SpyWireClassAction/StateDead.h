@@ -4,7 +4,7 @@ class StateDead :
     public StateBaseClass
 {
 public:
-    StateDead() : StateBaseClass() {};
+    StateDead(Agent8* player) : StateBaseClass(player) {};
     ~StateDead() {};
 
     void Update(Agent8* player) override;

@@ -21,7 +21,7 @@ void Laser::CollisionUpdateLoop()
 		{
 			m_collsionCheckList[i]->Destroy();
 			m_destroy = true;
-			((Agent8*)GameObjectManager::GetPlayer(0))->AddScore(100);
+			m_pParentPlayer->AddScore(100);
 		}
 	}
 
@@ -36,11 +36,11 @@ void Laser::CollisionUpdateLoop()
 				m_collsionCheckList[i]->Destroy();
 				m_destroy = true;
 				Play::PlayAudio("error");
-				((Agent8*)GameObjectManager::GetPlayer(0))->AddScore(-300);
+				m_pParentPlayer->AddScore(-300);
 			}
 		}
 
-		if (((Agent8*)GameObjectManager::GetPlayer(0))->GetScore() < 0)
-			((Agent8*)GameObjectManager::GetPlayer(0))->ResetScore();
+		if (m_pParentPlayer->GetScore() < 0)
+			m_pParentPlayer->ResetScore();
 	}
 }

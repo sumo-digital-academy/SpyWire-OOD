@@ -34,8 +34,20 @@ bool MainGameUpdate( float elapsedTime )
 
 	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP AND DOWN AND SPACE TO FIRE",
 		{ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
-	Play::DrawFontText("132px", "SCORE: " + std::to_string(((Agent8*)GameObjectManager::GetPlayer(0))->GetScore()),
-		{ DISPLAY_WIDTH / 2, 50 }, Play::CENTRE);
+
+	std::vector<GameObjectClass*> playerList;
+	GameObjectManager::GetAllPlayers(playerList, true);
+
+	for (int i = 0; i < playerList.size(); i++)
+	{
+		Play::DrawFontText("132px", "SCORE: " + std::to_string(((Agent8*)playerList[i])->GetScore()),
+			{ DISPLAY_WIDTH / 2, 50 + (100 * i) }, Play::CENTRE);
+	}
+
+	//if (Play::KeyPressed('O'))
+	//{
+	//	GameObjectManager::CreateObject(TYPE_AGENT8, { 115, 0 }, { 0, 0 });
+	//}
 
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( VK_ESCAPE );
@@ -46,7 +58,7 @@ int MainGameExit( void )
 {
 	//delete gameState.state;
 	GameObjectManager::DeleteAll();
-	StateBaseClass::DestroyEnd();
+	StateBaseClass::DestroyAll();
 	Play::DestroyManager();
 	return PLAY_OK;
 }

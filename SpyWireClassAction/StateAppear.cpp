@@ -15,5 +15,5 @@ void StateAppear::Update(Agent8* player)
 	player->SetRotation(0);
 
 	if (player->GetPosition().y >= DISPLAY_HEIGHT / 3)
-		SwitchStates(STATE_PLAY);
+		SwitchStates(player, STATE_PLAY);
 }

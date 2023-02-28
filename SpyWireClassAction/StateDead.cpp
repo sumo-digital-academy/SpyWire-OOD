@@ -12,13 +12,13 @@ void StateDead::Update(Agent8* player)
 
 	if (Play::KeyPressed(VK_SPACE) == true)
 	{
-		SwitchStates(STATE_APPEAR);
+		SwitchStates(player, STATE_APPEAR);
 		player->SetPosition({ 115, 0 });
 		player->SetVelocity({ 0, 0 });
 		player->SetFrame(0);
 		Play::StartAudioLoop("music");
 		GameObjectManager::DeleteGameObjectsByType(TYPE_TOOL);
-		((Agent8*)GameObjectManager::GetPlayer(0))->ResetScore();
+		player->ResetScore();
 		for (int id_obj : Play::CollectGameObjectIDsByType(TYPE_TOOL)) // remove this later for classes
 			Play::GetGameObject(id_obj).type = TYPE_DESTROYED;
 	}

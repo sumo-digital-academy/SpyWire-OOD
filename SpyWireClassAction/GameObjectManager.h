@@ -14,9 +14,8 @@ public:
 	static void CleanUp(); // used to delete all objs marked for destruction at the end of each frame
 	static GameObjectClass* GetPlayer(int index) { return s_pPlayerList[index]; };
 	static int GetTotalPlayer() { return s_pPlayerList.size(); }; // Will return the number of players - useful for when needing to loop through each player
-	static int GetAllPlayer(std::vector<GameObjectClass*>& list); // Will alter the list given as a parameter to contain all the players.
-	static int GetAllPlayer(std::vector<GameObjectClass*>& list, bool clearList); // If you don't clear the list the function will check that each player is not in the list.
-	static void AddPlayer(GameObjectClass* playerPointer) { s_pPlayerList.push_back(playerPointer); }; // used to delete all objs marked for destruction at the end of each frame
+	static void GetAllPlayers(std::vector<GameObjectClass*>& list, bool clearList); // If you don't clear the list the function will check that each player is not in the list.
+	static void AddPlayer(GameObjectClass* playerPointer);
 	static void RemoveTools();
 
 	static int GetAllObjectsOfType(GameObjectType objType, std::vector<GameObjectClass*>& objList); // int is the number objects added to the list.

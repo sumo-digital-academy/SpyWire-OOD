@@ -8,6 +8,6 @@ public:
 	~Coin() {};
 
 	void Update() override;
-	void OnCollision() override;
+	void OnCollision(int playerIndex) override;
 };
 

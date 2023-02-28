@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObjectClass.h"
 
-class StateBaseClass; // forward declare StateBaseClass to avoid including it in the head causing a #include loop
+//class StateBaseClass; // forward declare StateBaseClass to avoid including it in the head causing a #include loop
 
 class Agent8
 	: public GameObjectClass
@@ -18,5 +18,6 @@ public:
 protected:
 private:
 	int m_score{ 0 };
+	//StateBaseClass* m_state;
 };
 

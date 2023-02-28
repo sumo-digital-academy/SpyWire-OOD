@@ -19,7 +19,7 @@ public:
 	virtual ~GameObjectClass() {};
 
 	virtual void Update() {};
-	virtual void OnCollision() {};
+	virtual void OnCollision(int playerIndex) {}; // due to there being a more than one player you will need a way to tell which one you collided with
 	
 	bool CheckDestroy() { return m_destroy; };
 	bool CollisionTest(GameObjectClass* objA, GameObjectClass* objB);

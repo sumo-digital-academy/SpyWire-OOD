@@ -4,6 +4,7 @@
 #include "Agent8.h"
 #include "StatePlay.h"
 #include "GameObjectManager.h"
+#include "Laser.h"
 
 void StatePlay::Update(Agent8* player)
 {
@@ -21,7 +22,7 @@ void StatePlay::Update(Agent8* player)
 	{
 		if (player->GetVelocity().y > 5)
 		{
-			SwitchStates(STATE_HALT);
+			SwitchStates(player, STATE_HALT);
 			player->SetSprite("agent8_halt", 0.333f);
 			player->SetAcceleration({ 0, 0 });
 		}
@@ -36,7 +37,8 @@ void StatePlay::Update(Agent8* player)
 	if (Play::KeyPressed(VK_SPACE))
 	{
 		Vector2D firePos = player->GetPosition() + Vector2D(155, -75);
-		GameObjectManager::CreateObject(TYPE_LASER, firePos, { 32, 0 });
+		GameObjectClass* laser = GameObjectManager::CreateObject(TYPE_LASER, firePos, { 32, 0 });
+		((Laser*)laser)->SetParentPlayerIndex(player);
 		Play::PlayAudio("shoot");
 	}
 }

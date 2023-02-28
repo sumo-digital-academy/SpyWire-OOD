@@ -21,13 +21,20 @@ Tools::Tools(GameObjectType objTypes, Point2f position, Vector2f velocity, std::
 
 void Tools::Update()
 {
-	if (StateBaseClass::GetStateType() != STATE_DEAD && CollisionTest(this, GameObjectManager::GetPlayer(0)))
-	{
-		Play::StopAudioLoop("music");
-		Play::PlayAudio("die");
+	std::vector<GameObjectClass*> playerList;
+	GameObjectManager::GetAllPlayers(playerList, true);
 
-		StateBaseClass::SwitchStates(STATE_DEAD);
+	for (int i = 0; i < playerList.size(); i++)
+	{
+		if (StateBaseClass::GetStateType((Agent8*)playerList[i]) != STATE_DEAD && CollisionTest(this, playerList[i]))
+		{
+			Play::StopAudioLoop("music");
+			Play::PlayAudio("die");
+
+			StateBaseClass::SwitchStates((Agent8*)playerList[i], STATE_DEAD);
+		}
 	}
+
 	UpdateMovement();
 	UpdateAnimation();
 

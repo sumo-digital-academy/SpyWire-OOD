@@ -11,5 +11,5 @@ void StateHalt::Update(Agent8* player)
 	
 	int maxFrames = PlayGraphics::Instance().GetSpriteFrames(player->GetSpriteID()) - 1;
 	if (player->GetFrame() >= maxFrames)
-		SwitchStates(STATE_PLAY);
+		SwitchStates(player, STATE_PLAY);
 }
