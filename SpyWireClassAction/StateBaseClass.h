@@ -1,5 +1,5 @@
 #pragma once
-enum Agent8State // <- copyed these here as there is no header to include for them - this will allow me to avoid #including the states in each other, as can be seen in SwitchStates(StateBaseClass* newState).
+enum Agent8State // <- By having the states here anything that knows (#includes) this class will know about the states as well
 {
 	STATE_APPEAR = 0,
 	STATE_HALT,

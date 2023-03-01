@@ -22,7 +22,7 @@ GameObjectClass::GameObjectClass(GameObjectType objType, Point2f position, Vecto
 	// The sprite starts in the top left pixel so we need to divide the width and the height to get them to align with the center
 	m_spriteWidth = Play::GetSpriteWidth(m_spriteID) / 2;
 	m_spriteHeight = Play::GetSpriteHeight(m_spriteID) / 2;
-	m_radius = m_spriteWidth; // Auto setting each object's radius to be their sprite width - should find a better (box orientated) collision method.
+	m_radius = m_spriteWidth; // Setting each object's radius to be their sprite width.
 
 	GameObjectManager::RegisterGameObject(this); // <-- this will add all objects that use this constructor to the list of GameObjects
 }
@@ -114,6 +114,8 @@ void GameObjectClass::UpdateMovement()
 
 void GameObjectClass::Destroy()
 {
+	// The first time we destroy something we want it to flash.
+	// The seconds time we want rid of it.
 	if (m_type != TYPE_DESTROYED)
 	{
 		m_frame = 0;

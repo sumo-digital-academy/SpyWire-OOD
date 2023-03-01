@@ -25,7 +25,7 @@ void Laser::CollisionUpdateLoop()
 		}
 	}
 
- 	int numberOfObjects = GameObjectManager::GetAllObjectsOfType(TYPE_COIN, m_collsionCheckList); // this function will erase everything in the list
+ 	int numberOfObjects = GameObjectManager::GetAllObjectsOfType(TYPE_COIN, m_collsionCheckList); // this function will erase everything in the list before adding to it
 
 	if (numberOfObjects > 0)
 	{

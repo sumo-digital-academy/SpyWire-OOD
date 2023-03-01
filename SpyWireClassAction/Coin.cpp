@@ -34,7 +34,7 @@ void Coin::OnCollision(int playerIndex)
 		float angle = rad * PLAY_PI;
 		star->SetVelocity({ SPEED * sin(angle), SPEED * -cos(angle) });
 	}
-	((Agent8*)player)->AddScore(500); // turn the pointer from a memory address to the int value
+	((Agent8*)player)->AddScore(500);
 	
 	Play::PlayAudio("collect");
 	m_destroy = true;

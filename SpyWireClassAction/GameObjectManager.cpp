@@ -80,9 +80,9 @@ void GameObjectManager::RenderAll()
 		{
 			GameObjectClass& obj = *s_vpGameObjectList[i]; // making a reference as to avoid typing out s_vpGameObjectList[i] each time we need it in the loop.
 
-			if (obj.GetSpriteID() != -1) // This is to avoid drawing the states which don't have a sprite name 
+			if (obj.GetSpriteID() != -1) // This is to avoid drawing the objects that don't have a sprite name (but there shouldn't be any such objects)
 			{
-				int frame = static_cast<int>(obj.GetFrame()); // due to obj_frame being a float we will cast it to a int to get rid of the decimals
+				int frame = static_cast<int>(obj.GetFrame()); // due to obj_frame being a float we will cast it to a int to get rid of the decimals and warnings
 				Play::DrawSpriteRotated(obj.GetSpriteID(), obj.GetPosition(), frame, obj.GetRotation(), 1, 1);
 			}
 		}
@@ -91,7 +91,7 @@ void GameObjectManager::RenderAll()
 
 void GameObjectManager::DeleteAll()
 {
-	for (int i = 0; i < s_vpGameObjectList.size(); i++) // We are deleting every element in the list so no need to increase i as the vector will shrink the list as we delete
+	for (int i = 0; i < s_vpGameObjectList.size(); i++)
 	{
 		delete s_vpGameObjectList[i];
 	}
@@ -186,7 +186,7 @@ void GameObjectManager::DeleteGameObjectsByType(GameObjectType type)
 	for (int i = 0; i < s_vpGameObjectList.size(); i++)
 	{
 		if (s_vpGameObjectList[i]->GetObjectType() == type)
-			s_vpGameObjectList[i]->Destroy(); // <-- remember this funtion does not immediatly destroy the objects but sets them to be deleted later
+			s_vpGameObjectList[i]->Destroy();
 	}
 }
 

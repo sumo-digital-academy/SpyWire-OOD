@@ -13,8 +13,6 @@ Agent8::Agent8(GameObjectType objType, Point2f position, Vector2f velocity, std:
 
 void Agent8::Update()
 {
-	//m_state->Update();
-
 	StateBaseClass::FindPlayerState(*this)->Update(this);
 	UpdateMovement();
 
