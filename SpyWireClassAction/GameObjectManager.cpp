@@ -9,7 +9,8 @@
 #include "Laser.h"
 #include "StateBaseClass.h"
 
-std::vector<GameObjectClass*> GameObjectManager::s_vpGameObjectList; // Must manually initialize all static variables within a class.
+// Must manually initialize all static variables within a class.
+std::vector<GameObjectClass*> GameObjectManager::s_vpGameObjectList; 
 std::vector<GameObjectClass*> GameObjectManager::s_pPlayerList;
 
 GameObjectClass* GameObjectManager::CreateObject(GameObjectType objType, Point2f pos, Vector2f vel)
@@ -106,7 +107,7 @@ void GameObjectManager::CleanUp()
 		{
 			delete s_vpGameObjectList[i];
 			s_vpGameObjectList.erase(find(s_vpGameObjectList.begin(), s_vpGameObjectList.end(), s_vpGameObjectList[i]));
-			i--; // as we delete the vector array will move all elements backwards so we need to move i back by one
+			i--; // as we erase the vector array element all other elements move backwards so we need to move i back by one
 		}
 	}
 }

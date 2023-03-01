@@ -56,7 +56,6 @@ bool MainGameUpdate( float elapsedTime )
 // Gets called once when the player quits the game 
 int MainGameExit( void )
 {
-	//delete gameState.state;
 	GameObjectManager::DeleteAll();
 	StateBaseClass::DestroyAll();
 	Play::DestroyManager();
