@@ -2,8 +2,6 @@
 #include "GameObjectClass.h"
 #include "GameObjectManager.h"
 
-//extern std::vector<GameObjectClass*> s_vpGameObjectList;
-
 GameObjectClass::GameObjectClass() 
 { 
 	GameObjectManager::RegisterGameObject(this);
@@ -72,7 +70,6 @@ bool GameObjectClass::IsLeavingDisplay(bool vertical, bool horizontal)
 		{
 			return true;
 		}
-
 	}
 
 	if (horizontal)
